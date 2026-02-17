@@ -1,0 +1,11 @@
+google-cloud-translate==3.8.1
+transformers
+datasets
+TTS
+torch
+soundfile
+librosa
+pydub
+huggingface_hub
+openai
+pytest

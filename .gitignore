@@ -1,0 +1,8 @@
+*.pyc
+__pycache__/
+.env
+secrets.json
+dataset/audios/*.wav
+finetuned/
+.DS_Store
+.pytest_cache/
