@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -21,7 +22,8 @@ def synthesize(text: str, model_path: str, output: str = "out.wav") -> str:
 
         tts = TTS(model_path=model_path)
         tts.tts_to_file(text=text, file_path=out_path.as_posix())
-    except Exception:
+    except (ImportError, OSError, RuntimeError, ValueError) as exc:
+        print(f"[synthesize.py] fallback sinusoïde activé: {exc}", file=sys.stderr)
         _fallback_sine(out_path)
     return out_path.as_posix()
 

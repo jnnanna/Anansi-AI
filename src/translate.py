@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from typing import Optional
 
 _MOCK_TRANSLATIONS = {
@@ -29,7 +30,8 @@ def translate_text(text: str, target_lang: str = "wo", gcloud_json_path: Optiona
             client = translate.Client()
             res = client.translate(text, target_language=target_lang)
             return res["translatedText"]
-        except Exception:
+        except (ImportError, OSError, ValueError) as exc:
+            print(f"[translate.py] fallback mock activé: {exc}", file=sys.stderr)
             return _mock_translate(text, target_lang)
     return _mock_translate(text, target_lang)
 

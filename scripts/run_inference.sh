@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python /home/runner/work/Anansi-AI/Anansi-AI/src/synthesize.py "$@"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python "${SCRIPT_DIR}/../src/synthesize.py" "$@"

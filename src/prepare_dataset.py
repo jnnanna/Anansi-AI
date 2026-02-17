@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import shutil
+import sys
 from pathlib import Path
 
 from utils import ensure_dir
@@ -41,7 +42,8 @@ def prepare_dataset(input_dir: str, output_dir: str, metadata_name: str = "metad
                 continue
             try:
                 normalize_wav(src, dst)
-            except Exception:
+            except (ImportError, OSError, ValueError) as exc:
+                print(f"[prepare_dataset.py] normalisation impossible pour {wav_name}: {exc}", file=sys.stderr)
                 shutil.copy2(src, dst)
             kept_rows.append((wav_name, text))
 
